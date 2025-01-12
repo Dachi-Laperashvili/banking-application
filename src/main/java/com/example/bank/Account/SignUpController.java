@@ -1,4 +1,4 @@
-package com.example.bank;
+package com.example.bank.Account;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
