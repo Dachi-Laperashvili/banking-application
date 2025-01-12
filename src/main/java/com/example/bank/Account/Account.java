@@ -2,10 +2,10 @@ package com.example.bank.Account;
 
 public class Account {
     private String fullName;
-    private String id;
+    private long id;
     private String password;
 
-    public Account(String firstName,String lastName, String id, String password){
+    public Account(String firstName,String lastName, long id, String password){
         this.id = id;
         this.password = password;
         fullName = firstName + " " + lastName;
@@ -19,7 +19,7 @@ public class Account {
         this.fullName = fullName;
     }
 
-    public String getId() {
+    public long getId() {
         return id;
     }
 

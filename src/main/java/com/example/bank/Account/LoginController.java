@@ -19,12 +19,15 @@ public class LoginController {
 
     @FXML
     private void handleLogin(){
-        System.out.println("Error");
+        System.out.println("Error, login functionality yet to be created");
     }
 
+//  displaying signup fxml file when clicking on sign up button
     @FXML
     private void handleSignUp(ActionEvent event) throws IOException{
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("signup.fxml"));
+        System.out.println("Trying to load: " + getClass().getResource("/com/example/bank/signup.fxml"));
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/bank/signup.fxml"));
 
         Stage stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
 
