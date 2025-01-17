@@ -9,6 +9,7 @@ module com.example.bank {
     requires org.kordamp.ikonli.javafx;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens com.example.bank to javafx.fxml;
     exports com.example.bank;

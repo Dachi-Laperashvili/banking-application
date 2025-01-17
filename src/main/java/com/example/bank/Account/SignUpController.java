@@ -51,16 +51,16 @@ public class SignUpController {
         Account newAcc = new Account(firstName.getText(),lastName.getText(),Long.parseLong(id.getText()),password.getText());
 
         // creating new account if account with that id doesn't exist in array list
-        if(accountRepository.findAccountById(newAcc.getId()) == null){
-           accountRepository.add(newAcc);
-           System.out.println("Account created successfully");
-           System.out.println(accountRepository.findAccountById(newAcc.getId()));
+        if(accountRepository.findAccountByPersonalId(newAcc.getPersonalId()) == null){
+            accountRepository.add(newAcc);
+            System.out.println("Account created successfully");
+            System.out.println(accountRepository.findAccountByPersonalId(newAcc.getPersonalId()));
         }else{
             System.out.println("Account with that ID already exists");
         }
     }
 
-//  displaying login fxml page when clicking on "already have an account?" button
+    //  displaying login fxml page when clicking on "already have an account?" button
     @FXML
     public void handleLoginBtn(ActionEvent e) throws IOException {
         System.out.println("Trying to load: " + getClass().getResource("/com/example/bank/login.fxml"));
