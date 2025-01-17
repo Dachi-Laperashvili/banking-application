@@ -15,21 +15,18 @@
 <AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bank.Account.LoginController">
     <VBox prefHeight="500.0" prefWidth="316.0" style="-fx-background-color: #1c7ed6;">
       <children>
-         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <ImageView fitHeight="169.0" fitWidth="169.0" pickOnBounds="true" preserveRatio="true">
             <VBox.margin>
-               <Insets left="80.0" top="100.0" />
+               <Insets left="75.0" top="148.0" />
             </VBox.margin>
             <image>
                <Image url="@../../../images/bank.png" />
             </image>
          </ImageView>
-         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="MyBank" wrappingWidth="152.13671875">
+         <Text strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="152.13671875">
             <font>
-               <Font name="Algerian" size="36.0" />
+               <Font name="Times New Roman" size="36.0" />
             </font>
-            <VBox.margin>
-               <Insets left="82.0" top="10.0" />
-            </VBox.margin>
          </Text>
       </children></VBox>
     <VBox layoutX="350.0" layoutY="79.0" prefHeight="307.0" prefWidth="320.0">

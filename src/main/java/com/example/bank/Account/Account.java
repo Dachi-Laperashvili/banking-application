@@ -5,6 +5,7 @@ public class Account {
     private long personal_id;
     private String password;
 
+
     public Account(String firstName,String lastName,long personal_id, String password){
         this.personal_id = personal_id;
         this.password = password;

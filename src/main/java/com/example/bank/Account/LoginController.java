@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.io.IOException;
 
@@ -41,7 +42,8 @@ public class LoginController {
         Account account = accountRepository.findAccountByPersonalId(Long.parseLong(idField.getText()));
         // if account exists logging user in using session manager class
         if(account != null){
-            if(account.getPassword().equals(passwordField.getText())){
+//            account.getPassword().equals(passwordField.getText()
+            if(BCrypt.checkpw(passwordField.getText(),account.getPassword())){
                 session.login(account);
                 System.out.println(session.getCurrentAcc());
                 System.out.println("Successfully logged in!");
