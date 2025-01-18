@@ -1,31 +1,20 @@
-package com.example.bank.Account;
+package com.example.bank.User;
 
-import java.math.BigDecimal;
-
-public class Account {
+public class User {
     private String fullName;
     private long personal_id;
     private String password;
-    private BigDecimal balance = BigDecimal.ZERO.setScale(2);
 
-    public Account(String firstName,String lastName,long personal_id, String password){
+    public User(String firstName, String lastName, long personal_id, String password){
         this.personal_id = personal_id;
         this.password = password;
         fullName = firstName + " " + lastName;
     }
 
-    public Account(String fullName,long personal_id, String password){
+    public User(String fullName, long personal_id, String password){
         this.personal_id = personal_id;
         this.password = password;
         this.fullName = fullName;
-    }
-
-    public BigDecimal getBalance(){
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance){
-        this.balance = balance;
     }
 
     public String getFullName() {

@@ -1,4 +1,4 @@
-package com.example.bank.Account;
+package com.example.bank.User;
 
 import org.mindrot.jbcrypt.BCrypt;
 
@@ -7,35 +7,34 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class AccountRepository {
+public class UserRepository {
 
     private String dbUrl = "jdbc:mysql://127.0.0.1:3306/bank";
     private String dbUser = "root";
     private String dbPassword = System.getenv("DB_PASSWORD");
 
-    public void add(Account account){
+    public void add(User user){
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO accounts (fullName,password,personal_id, balance) VALUES (?, ?, ?, ?)")){
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (fullName,password,personal_id) VALUES (?, ?, ?)")){
 
-            statement.setString(1, account.getFullName());
-            statement.setString(2, BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
-            statement.setLong(3,account.getPersonalId());
-            statement.setBigDecimal(4,account.getBalance());
+            statement.setString(1, user.getFullName());
+            statement.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+            statement.setLong(3, user.getPersonalId());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public Account findAccountByPersonalId(long personal_id){
+    public User findAccountByPersonalId(long personal_id){
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            PreparedStatement statement = connection.prepareStatement("SELECT * FROM accounts WHERE personal_id = ?")){
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE personal_id = ?")){
 
             statement.setLong(1,personal_id);
 
             try(ResultSet resultSet = statement.executeQuery()){
                 if(resultSet.next()){
-                    Account acc = new Account(resultSet.getString("fullName"),resultSet.getLong("personal_id"),resultSet.getString("password"));
-                    return acc;
+                    User user = new User(resultSet.getString("fullName"),resultSet.getLong("personal_id"),resultSet.getString("password"));
+                    return user;
                 }
             }
 

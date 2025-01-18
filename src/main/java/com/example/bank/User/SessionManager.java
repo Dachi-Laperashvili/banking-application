@@ -1,7 +1,7 @@
-package com.example.bank.Account;
+package com.example.bank.User;
 
 public class SessionManager {
-    private Account currentAcc;
+    private User currentUser;
     private static SessionManager instance;
 
     public SessionManager(){}
@@ -13,19 +13,19 @@ public class SessionManager {
         return instance;
     }
 
-    public void login(Account account){
-        currentAcc = account;
+    public void login(User user){
+        currentUser = user;
     }
 
     public void logout(){
-        currentAcc = null;
+        currentUser = null;
     }
 
-    public Account getCurrentAcc(){
-        return currentAcc;
+    public User getCurrentUser(){
+        return currentUser;
     }
 
     public boolean isLoggedIn(){
-        return currentAcc != null;
+        return currentUser != null;
     }
 }

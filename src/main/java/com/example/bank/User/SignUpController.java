@@ -1,4 +1,4 @@
-package com.example.bank.Account;
+package com.example.bank.User;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SignUpController {
-    private AccountRepository accountRepository;
+    private UserRepository userRepository;
     @FXML
     private TextField firstName;
     @FXML
@@ -23,7 +23,7 @@ public class SignUpController {
     private PasswordField password;
 
     public SignUpController(){
-        this.accountRepository = new AccountRepository();
+        this.userRepository = new UserRepository();
     }
 
     @FXML
@@ -48,13 +48,13 @@ public class SignUpController {
         }
 
 
-        Account newAcc = new Account(firstName.getText(),lastName.getText(),Long.parseLong(id.getText()),password.getText());
+        User newAcc = new User(firstName.getText(),lastName.getText(),Long.parseLong(id.getText()),password.getText());
 
         // creating new account if account with that id doesn't exist in array list
-        if(accountRepository.findAccountByPersonalId(newAcc.getPersonalId()) == null){
-            accountRepository.add(newAcc);
+        if(userRepository.findAccountByPersonalId(newAcc.getPersonalId()) == null){
+            userRepository.add(newAcc);
             System.out.println("Account created successfully");
-            System.out.println(accountRepository.findAccountByPersonalId(newAcc.getPersonalId()));
+            System.out.println(userRepository.findAccountByPersonalId(newAcc.getPersonalId()));
         }else{
             System.out.println("Account with that ID already exists");
         }
