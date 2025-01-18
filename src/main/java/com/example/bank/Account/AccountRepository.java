@@ -15,11 +15,12 @@ public class AccountRepository {
 
     public void add(Account account){
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO accounts (fullName,password,personal_id) VALUES (?, ?, ?)")){
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO accounts (fullName,password,personal_id, balance) VALUES (?, ?, ?, ?)")){
 
             statement.setString(1, account.getFullName());
             statement.setString(2, BCrypt.hashpw(account.getPassword(), BCrypt.gensalt()));
             statement.setLong(3,account.getPersonalId());
+            statement.setBigDecimal(4,account.getBalance());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
