@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -18,6 +19,10 @@ public class LoginController {
     private TextField idField;
     @FXML
     private PasswordField passwordField;
+    @FXML
+    private Label idErrorLabel;
+    @FXML
+    private Label passwordErrorLabel;
 
     public LoginController(){
         userRepository = new UserRepository();
@@ -25,17 +30,25 @@ public class LoginController {
 
     @FXML
     private void handleLogin(){
+    //  clearing error messages
+        idErrorLabel.setText("");
+        passwordErrorLabel.setText("");
+
         SessionManager session = SessionManager.getInstance();
 
         //  checking if any fields are empty
-        if(passwordField.getText().isEmpty() || idField.getText().isEmpty()){
-            System.out.println("All fields are required!");
-            return;
+
+        if(idField.getText().isEmpty()){
+            idErrorLabel.setText("ID is required!");
+        }
+
+        if(passwordField.getText().isEmpty()){
+            passwordErrorLabel.setText("Password is required!");
         }
 
         // making sure that ID only contains numbers
         if(!idField.getText().matches("[0-9]+")){
-            System.out.println("Invalid ID");
+            idErrorLabel.setText("Invalid ID");
             return;
         }
 
@@ -48,10 +61,10 @@ public class LoginController {
                 System.out.println(session.getCurrentUser());
                 System.out.println("Successfully logged in!");
             }else {
-                System.out.println("Invalid password!");
+                passwordErrorLabel.setText("Incorrect password!");
             }
         }else{
-            System.out.println("Account with that ID doesn't exist!");
+            idErrorLabel.setText("Account with that ID doesn't exist!");
         }
     }
 

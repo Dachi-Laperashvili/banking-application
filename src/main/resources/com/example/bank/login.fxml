@@ -43,6 +43,11 @@
                 <Insets top="7.0" />
             </VBox.margin>
         </TextField>
+        <Label fx:id="idErrorLabel" textFill="red" text="" wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
         <Label prefHeight="18.0" prefWidth="128.0" text="Password">
             <VBox.margin>
                 <Insets top="30.0" />
@@ -56,6 +61,11 @@
                 <Insets top="7.0" />
             </VBox.margin>
         </PasswordField>
+        <Label fx:id="passwordErrorLabel" textFill="red" text="" wrapText="true">
+            <VBox.margin>
+                <Insets top="5.0" />
+            </VBox.margin>
+        </Label>
         <Button mnemonicParsing="false" onAction="#handleLogin" prefHeight="30.0" prefWidth="316.0" style="-fx-background-color: #228be6; -fx-cursor: hand;" text="Log in" textFill="WHITE">
             <VBox.margin>
                 <Insets left="2.0" top="25.0" />

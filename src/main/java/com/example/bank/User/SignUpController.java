@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -21,6 +22,14 @@ public class SignUpController {
     private TextField id;
     @FXML
     private PasswordField password;
+    @FXML
+    private Label firstNameError;
+    @FXML
+    private Label lastNameError;
+    @FXML
+    private Label idError;
+    @FXML
+    private Label passwordError;
 
     public SignUpController(){
         this.userRepository = new UserRepository();
@@ -28,22 +37,34 @@ public class SignUpController {
 
     @FXML
     public void register(){
+        // clearing out errors
+        firstNameError.setText("");
+        lastNameError.setText("");
+        idError.setText("");
+        passwordError.setText("");
 
         //  checking if any fields are empty
-        if(firstName.getText().isEmpty() || lastName.getText().isEmpty() || password.getText().isEmpty()){
-            System.out.println("All fields are required!");
-            return;
+        if(firstName.getText().isEmpty()){
+            firstNameError.setText("First name is required!");
+        }
+
+        if(lastName.getText().isEmpty()){
+            lastNameError.setText("Last name is required!");
+        }
+
+        if(password.getText().isEmpty()){
+            passwordError.setText("Password is required!");
         }
 
         // making sure that ID only contains numbers and is 11 characters long
         if(!id.getText().matches("[0-9]+") || id.getText().length() != 11 ){
-            System.out.println("Invalid ID");
+            idError.setText("Invalid ID!");
             return;
         }
 
         // checking if password length is 8 characters long or more
         if(password.getText().length() < 8){
-            System.out.println("Password should be at least 8 characters long!");
+            passwordError.setText("Password should be at least 8 characters long!");
             return;
         }
 
@@ -56,7 +77,7 @@ public class SignUpController {
             System.out.println("Account created successfully");
             System.out.println(userRepository.findAccountByPersonalId(newAcc.getPersonalId()));
         }else{
-            System.out.println("Account with that ID already exists");
+            idError.setText("Account with that ID already exists");
         }
     }
 

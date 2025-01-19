@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bank.User.SignUpController">
+<AnchorPane prefHeight="600.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bank.User.SignUpController">
    <children>
       <VBox layoutX="190.0" layoutY="90.0" prefHeight="307.0" prefWidth="320.0">
          <children>
@@ -22,6 +22,11 @@
                </font>
             </Label>
             <TextField fx:id="firstName" promptText="Enter your first name" />
+            <Label fx:id="firstNameError" text="" textFill="red" wrapText="true">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
             <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="25.0" prefWidth="153.0" text="Last Name" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="16.0" />
@@ -31,6 +36,11 @@
                </VBox.margin>
             </Label>
             <TextField fx:id="lastName" promptText="Enter your last name" />
+            <Label fx:id="lastNameError" text="" textFill="red" wrapText="true">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
             <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="25.0" prefWidth="153.0" text="ID number" textAlignment="CENTER">
                <VBox.margin>
                   <Insets top="30.0" />
@@ -44,6 +54,11 @@
                   <Insets top="7.0" />
                </VBox.margin>
             </TextField>
+            <Label fx:id="idError" text="" textFill="red" wrapText="true">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
             <Label prefHeight="18.0" prefWidth="128.0" text="Password">
                <VBox.margin>
                   <Insets top="30.0" />
@@ -57,6 +72,11 @@
                   <Insets top="7.0" />
                </VBox.margin>
             </PasswordField>
+            <Label fx:id="passwordError" text="" textFill="red" wrapText="true">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
             <Button mnemonicParsing="false" onAction="#register" prefHeight="25.0" prefWidth="316.0" style="-fx-background-color: #1c7ed6; -fx-cursor: hand;" text="Sign up" textFill="WHITE">
                <VBox.margin>
                   <Insets left="2.0" top="10.0" />
@@ -75,7 +95,7 @@
             <Font name="System Bold" size="36.0" />
          </font>
       </Text>
-      <Hyperlink layoutX="266.0" layoutY="438.0" onAction="#handleLoginBtn" text="Already have an user?">
+      <Hyperlink layoutX="271.0" layoutY="536.0" onAction="#handleLoginBtn" text="Already have an user?">
          <font>
             <Font size="14.0" />
          </font>
