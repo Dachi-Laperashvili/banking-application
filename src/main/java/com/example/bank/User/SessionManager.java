@@ -4,7 +4,7 @@ public class SessionManager {
     private User currentUser;
     private static SessionManager instance;
 
-    public SessionManager(){}
+    private SessionManager(){}
 
     public static SessionManager getInstance(){
         if(instance == null){

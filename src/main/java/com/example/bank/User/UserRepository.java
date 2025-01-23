@@ -15,11 +15,12 @@ public class UserRepository {
 
     public void add(User user){
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (fullName,password,personal_id) VALUES (?, ?, ?)")){
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstName,lastName,password,personal_id) VALUES (?, ?, ?, ?)")){
 
-            statement.setString(1, user.getFullName());
-            statement.setString(2, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
-            statement.setLong(3, user.getPersonalId());
+            statement.setString(1,user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+            statement.setLong(4, user.getPersonalId());
             statement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -33,7 +34,8 @@ public class UserRepository {
 
             try(ResultSet resultSet = statement.executeQuery()){
                 if(resultSet.next()){
-                    User user = new User(resultSet.getString("fullName"),resultSet.getLong("personal_id"),resultSet.getString("password"));
+                    User user = new User(resultSet.getString("firstName"),resultSet.getString("lastName"),
+                            resultSet.getLong("personal_id"),resultSet.getString("password"));
                     return user;
                 }
             }

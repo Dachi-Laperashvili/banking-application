@@ -1,5 +1,6 @@
 package com.example.bank.User;
 
+import com.example.bank.Dashboard.DashboardController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +30,7 @@ public class LoginController {
     }
 
     @FXML
-    private void handleLogin(){
+    private void handleLogin(ActionEvent event) throws IOException{
     //  clearing error messages
         idErrorLabel.setText("");
         passwordErrorLabel.setText("");
@@ -58,6 +59,13 @@ public class LoginController {
 //            account.getPassword().equals(passwordField.getText()
             if(BCrypt.checkpw(passwordField.getText(), user.getPassword())){
                 session.login(user);
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/bank/dashboard.fxml"));
+
+                Stage stage =(Stage) ((Node)event.getSource()).getScene().getWindow();
+
+                Scene scene = new Scene(fxmlLoader.load());
+                stage.setScene(scene);
+                stage.show();
                 System.out.println(session.getCurrentUser());
                 System.out.println("Successfully logged in!");
             }else {
