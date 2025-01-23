@@ -1,15 +1,11 @@
 package com.example.bank.User;
 
+import com.example.bank.Utilities.NavigationUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-
 import java.io.IOException;
 
 public class SignUpController {
@@ -30,13 +26,14 @@ public class SignUpController {
     private Label idError;
     @FXML
     private Label passwordError;
+    private SessionManager session = SessionManager.getInstance();
 
     public SignUpController(){
         this.userRepository = new UserRepository();
     }
 
     @FXML
-    public void register(){
+    public void register(ActionEvent event) throws IOException{
         // clearing out errors
         firstNameError.setText("");
         lastNameError.setText("");
@@ -74,6 +71,8 @@ public class SignUpController {
         // creating new account if account with that id doesn't exist in array list
         if(userRepository.findAccountByPersonalId(newAcc.getPersonalId()) == null){
             userRepository.add(newAcc);
+            session.login(newAcc);
+            NavigationUtil.navigate("/com/example/bank/dashboard.fxml",event);
             System.out.println("Account created successfully");
             System.out.println(userRepository.findAccountByPersonalId(newAcc.getPersonalId()));
         }else{
@@ -83,15 +82,9 @@ public class SignUpController {
 
     //  displaying login fxml page when clicking on "already have an account?" button
     @FXML
-    public void handleLoginBtn(ActionEvent e) throws IOException {
+    public void handleLoginBtn(ActionEvent event) throws IOException {
         System.out.println("Trying to load: " + getClass().getResource("/com/example/bank/login.fxml"));
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/bank/login.fxml"));
-
-        Stage stage =(Stage) ((Node)e.getSource()).getScene().getWindow();
-
-        Scene scene = new Scene(fxmlLoader.load());
-        stage.setScene(scene);
-        stage.show();
+        NavigationUtil.navigate("/com/example/bank/login.fxml",event);
     }
+
 }
