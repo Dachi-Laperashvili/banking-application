@@ -76,7 +76,7 @@
                               <Font name="Calibri" size="15.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="22.0" prefWidth="515.0" text="11:30 Jan 20, 2025">
+                        <Label fx:id="date" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="22.0" prefWidth="515.0" text="11:30 Jan 20, 2025">
                            <font>
                               <Font name="Calibri" size="15.0" />
                            </font>
