@@ -15,18 +15,24 @@ public class UserRepository {
 
     public void add(User user){
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstName,lastName,password,personal_id) VALUES (?, ?, ?, ?)")){
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO users (firstName,lastName,password,personal_id) VALUES (?, ?, ?, ?)",PreparedStatement.RETURN_GENERATED_KEYS)){
 
             statement.setString(1,user.getFirstName());
             statement.setString(2, user.getLastName());
             statement.setString(3, BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
             statement.setLong(4, user.getPersonalId());
             statement.executeUpdate();
+
+            try(ResultSet generatedKeys = statement.getGeneratedKeys()){
+                if(generatedKeys.next()){
+                    user.setId(generatedKeys.getLong(1));
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public User findAccountByPersonalId(long personal_id){
+    public User findUserByPersonalId(long personal_id){
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE personal_id = ?")){
 
@@ -36,6 +42,7 @@ public class UserRepository {
                 if(resultSet.next()){
                     User user = new User(resultSet.getString("firstName"),resultSet.getString("lastName"),
                             resultSet.getLong("personal_id"),resultSet.getString("password"));
+                    user.setId(resultSet.getLong("id"));
                     return user;
                 }
             }

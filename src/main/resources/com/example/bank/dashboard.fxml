@@ -117,7 +117,7 @@
                                           <Insets left="10.0" top="10.0" />
                                        </VBox.margin>
                                     </FontAwesomeIconView>
-                                    <Label prefHeight="27.0" prefWidth="213.0" text="\$800.00" textFill="WHITE">
+                                    <Label fx:id="checkingBalance" prefHeight="27.0" prefWidth="213.0" text="\$800.00" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font>
@@ -125,7 +125,7 @@
                                           <Insets left="10.0" top="40.0" />
                                        </VBox.margin>
                                     </Label>
-                                    <Label prefHeight="27.0" prefWidth="143.0" text="*** *** *** *** 3456" textFill="WHITE">
+                                    <Label fx:id="checkingAccountId" prefHeight="27.0" prefWidth="143.0" text="*** *** *** *** 3456" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="15.0" />
                                        </font>

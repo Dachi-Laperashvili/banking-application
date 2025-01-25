@@ -1,5 +1,8 @@
 package com.example.bank.User;
 
+import com.example.bank.Account.AccountRepository;
+import com.example.bank.Account.AccountType;
+import com.example.bank.Account.BankAccount;
 import com.example.bank.Utilities.NavigationUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -7,9 +10,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class SignUpController {
     private UserRepository userRepository;
+    private AccountRepository accountRepository;
     @FXML
     private TextField firstName;
     @FXML
@@ -30,6 +36,7 @@ public class SignUpController {
 
     public SignUpController(){
         this.userRepository = new UserRepository();
+        this.accountRepository = new AccountRepository();
     }
 
     @FXML
@@ -69,12 +76,14 @@ public class SignUpController {
         User newAcc = new User(firstName.getText(),lastName.getText(),Long.parseLong(id.getText()),password.getText());
 
         // creating new account if account with that id doesn't exist in array list
-        if(userRepository.findAccountByPersonalId(newAcc.getPersonalId()) == null){
+        if(userRepository.findUserByPersonalId(newAcc.getPersonalId()) == null){
             userRepository.add(newAcc);
+        //  automatically creating checking account for user after registration and logging him in
+            accountRepository.add(new BankAccount(BigDecimal.ZERO,newAcc, AccountType.CHECKING_ACCOUNT));
             session.login(newAcc);
             NavigationUtil.navigate("/com/example/bank/dashboard.fxml",event);
             System.out.println("Account created successfully");
-            System.out.println(userRepository.findAccountByPersonalId(newAcc.getPersonalId()));
+            System.out.println(userRepository.findUserByPersonalId(newAcc.getPersonalId()));
         }else{
             idError.setText("Account with that ID already exists");
         }

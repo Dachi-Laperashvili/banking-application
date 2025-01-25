@@ -49,7 +49,7 @@ public class LoginController {
             return;
         }
 
-        User user = userRepository.findAccountByPersonalId(Long.parseLong(idField.getText()));
+        User user = userRepository.findUserByPersonalId(Long.parseLong(idField.getText()));
         // if account exists logging user in using session manager class
         if(user != null){
 //            account.getPassword().equals(passwordField.getText()

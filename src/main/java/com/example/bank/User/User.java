@@ -1,6 +1,7 @@
 package com.example.bank.User;
 
 public class User {
+    private Long id;
     private String firstName;
     private String fullName;
     private String lastName;
@@ -15,9 +16,11 @@ public class User {
         fullName = firstName + " " + lastName;
     }
 
-    public String getFullName() {
-        return fullName;
-    }
+    public Long getId(){return id;}
+
+    public void setId(Long id){this.id = id;}
+
+    public String getFullName() {return fullName;}
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
