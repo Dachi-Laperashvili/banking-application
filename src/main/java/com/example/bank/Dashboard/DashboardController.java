@@ -5,10 +5,15 @@ import com.example.bank.Account.AccountType;
 import com.example.bank.Account.BankAccount;
 import com.example.bank.User.SessionManager;
 import com.example.bank.Utilities.NavigationUtil;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.util.Duration;
+
 import java.io.IOException;
 import java.math.RoundingMode;
 import java.net.URL;
@@ -32,12 +37,14 @@ public class DashboardController implements Initializable {
     private Label savingsAccountId;
     private final SessionManager session = SessionManager.getInstance();
     private final AccountRepository accountRepository = new AccountRepository();
+    private Timeline timeline;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init();
         displayAccountInfo();
+        startAutoRefresh();
     }
 
     @FXML
@@ -62,8 +69,12 @@ public class DashboardController implements Initializable {
                 savingsBalance.setText("$" + account.getBalance().setScale(2, RoundingMode.HALF_UP));
                 savingsAccountId.setText("*** *** *** *** " + accountId.substring(length - 4));
             }
-            System.out.println(account);
         }
+    }
+    public void startAutoRefresh() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> displayAccountInfo()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     public void logout(ActionEvent event) throws IOException {
