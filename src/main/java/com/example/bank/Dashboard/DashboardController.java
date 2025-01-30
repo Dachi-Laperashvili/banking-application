@@ -1,6 +1,7 @@
 package com.example.bank.Dashboard;
 
 import com.example.bank.Account.AccountRepository;
+import com.example.bank.Account.AccountType;
 import com.example.bank.Account.BankAccount;
 import com.example.bank.User.SessionManager;
 import com.example.bank.Utilities.NavigationUtil;
@@ -13,6 +14,7 @@ import java.math.RoundingMode;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -24,6 +26,10 @@ public class DashboardController implements Initializable {
     private Label checkingBalance;
     @FXML
     private Label checkingAccountId;
+    @FXML
+    private Label savingsBalance;
+    @FXML
+    private Label savingsAccountId;
     private final SessionManager session = SessionManager.getInstance();
     private final AccountRepository accountRepository = new AccountRepository();
 
@@ -43,11 +49,21 @@ public class DashboardController implements Initializable {
     }
 
     public void displayAccountInfo(){
-        BankAccount bankAccount = accountRepository.findAccountByUserId(session.getCurrentUser().getId());
-        String accountId = bankAccount.getAccountId().toString();
-        int length = accountId.length();
-        checkingBalance.setText("$" + bankAccount.getBalance().setScale(2, RoundingMode.HALF_UP));
-        checkingAccountId.setText("*** *** *** *** " + accountId.substring(length - 4));
+        List<BankAccount> accounts= accountRepository.findAccountByUserId(session.getCurrentUser().getId());
+
+        for(BankAccount account: accounts){
+            String accountId = account.getAccountId().toString();
+            int length = accountId.length();
+
+            if(account.getAccountType() == AccountType.CHECKING_ACCOUNT) {
+                checkingBalance.setText("$" + account.getBalance().setScale(2, RoundingMode.HALF_UP));
+                checkingAccountId.setText("*** *** *** *** " + accountId.substring(length - 4));
+            }else if(account.getAccountType() == AccountType.SAVINGS_ACCOUNT){
+                savingsBalance.setText("$" + account.getBalance().setScale(2, RoundingMode.HALF_UP));
+                savingsAccountId.setText("*** *** *** *** " + accountId.substring(length - 4));
+            }
+            System.out.println(account);
+        }
     }
 
     public void logout(ActionEvent event) throws IOException {

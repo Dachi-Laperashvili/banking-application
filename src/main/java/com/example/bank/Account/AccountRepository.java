@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountRepository {
     private String dbUrl = "jdbc:mysql://127.0.0.1:3306/bank";
@@ -28,22 +30,23 @@ public class AccountRepository {
         }
     }
 
-    public BankAccount findAccountByUserId(Long user_id){
+    public List<BankAccount> findAccountByUserId(Long user_id){
+        List<BankAccount> accounts = new ArrayList<>();
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM accounts WHERE user_id = ?")){
             statement.setLong(1,user_id);
 
             try(ResultSet resultSet = statement.executeQuery()){
-                if(resultSet.next()){
+                while(resultSet.next()){
                     User user = new UserRepository().findUserByPersonalId(user_id);
                     BankAccount bankAccount = new BankAccount(resultSet.getLong("account_id"),resultSet.getBigDecimal("balance"),user,AccountType.valueOf(resultSet.getString("type")));
 
-                    return bankAccount;
+                    accounts.add(bankAccount);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return accounts;
     }
 }

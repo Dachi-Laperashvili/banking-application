@@ -78,8 +78,9 @@ public class SignUpController {
         // creating new account if account with that id doesn't exist in array list
         if(userRepository.findUserByPersonalId(newAcc.getPersonalId()) == null){
             userRepository.add(newAcc);
-        //  automatically creating checking account for user after registration and logging him in
+        //  automatically creating checking and savings account for user after registration and logging him in
             accountRepository.add(new BankAccount(BigDecimal.ZERO,newAcc, AccountType.CHECKING_ACCOUNT));
+            accountRepository.add(new BankAccount(BigDecimal.ZERO, newAcc,AccountType.SAVINGS_ACCOUNT));
             session.login(newAcc);
             NavigationUtil.navigate("/com/example/bank/dashboard.fxml",event);
             System.out.println("Account created successfully");
