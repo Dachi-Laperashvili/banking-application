@@ -38,7 +38,7 @@ public class AccountRepository {
 
             try(ResultSet resultSet = statement.executeQuery()){
                 while(resultSet.next()){
-                    User user = new UserRepository().findUserByPersonalId(user_id);
+                    User user = new UserRepository().findUserById(user_id);
                     BankAccount bankAccount = new BankAccount(resultSet.getLong("account_id"),resultSet.getBigDecimal("balance"),user,AccountType.valueOf(resultSet.getString("type")));
 
                     accounts.add(bankAccount);
@@ -48,5 +48,18 @@ public class AccountRepository {
             e.printStackTrace();
         }
         return accounts;
+    }
+
+    public void updateAccountBalance(BankAccount account){
+        try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            PreparedStatement statement = connection.prepareStatement("UPDATE accounts SET balance = ? WHERE account_id = ?")){
+
+            statement.setBigDecimal(1,account.getBalance());
+            statement.setLong(2,account.getAccountId());
+
+            statement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,15 +1,15 @@
 package com.example.bank.Transaction;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Transaction {
     private Long toId;
     private Long fromId;
     private BigDecimal amount;
-    private Date date;
+    private LocalDateTime date;
 
-    public Transaction(Long toId, Long fromId, BigDecimal amount, Date date){
+    public Transaction(Long toId, Long fromId, BigDecimal amount, LocalDateTime date){
         this.toId = toId;
         this.fromId = fromId;
         this.amount = amount;
@@ -28,7 +28,7 @@ public class Transaction {
         return amount;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -44,7 +44,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

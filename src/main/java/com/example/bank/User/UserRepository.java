@@ -52,4 +52,24 @@ public class UserRepository {
         }
         return null;
     }
+    public User findUserById(long id){
+        try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
+            PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE id = ?")){
+
+            statement.setLong(1,id);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                if(resultSet.next()){
+                    User user = new User(resultSet.getString("firstName"),resultSet.getString("lastName"),
+                            resultSet.getLong("personal_id"),resultSet.getString("password"));
+                    user.setId(resultSet.getLong("id"));
+                    return user;
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

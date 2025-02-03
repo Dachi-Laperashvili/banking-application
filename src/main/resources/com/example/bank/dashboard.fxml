@@ -190,19 +190,29 @@
                   </HBox>
                </children>
             </VBox>
-            <TextField layoutX="648.0" layoutY="429.0" prefHeight="26.0" prefWidth="182.0" />
             <Label layoutX="648.0" layoutY="397.0" prefHeight="25.0" prefWidth="151.0" text="Payee ID:">
                <font>
                   <Font size="15.0" />
                </font>
+            </Label>
+            <TextField fx:id="payeeIdField" layoutX="648.0" layoutY="429.0" prefHeight="26.0" prefWidth="182.0" />
+            <Label fx:id="payeeIdError" textFill="red" text="" wrapText="true">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
             </Label>
             <Label layoutX="648.0" layoutY="491.0" prefHeight="17.0" prefWidth="104.0" text="Amount:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField layoutX="649.0" layoutY="524.0" prefHeight="26.0" prefWidth="183.0" />
-            <Button layoutX="651.0" layoutY="574.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="183.0" style="-fx-background-color: #1c7ed6;" text="SEND" textFill="WHITE">
+            <TextField fx:id="amountField" layoutX="649.0" layoutY="524.0" prefHeight="26.0" prefWidth="183.0" />
+            <Label fx:id="amountError" textFill="red" text="" wrapText="true">
+               <VBox.margin>
+                  <Insets top="5.0" />
+               </VBox.margin>
+            </Label>
+            <Button onAction="#sendMoney" layoutX="651.0" layoutY="574.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="183.0" style="-fx-background-color: #1c7ed6;"  text="SEND" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
