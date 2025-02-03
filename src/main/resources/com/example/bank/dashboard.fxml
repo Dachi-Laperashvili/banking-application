@@ -196,23 +196,23 @@
                </font>
             </Label>
             <TextField fx:id="payeeIdField" layoutX="648.0" layoutY="429.0" prefHeight="26.0" prefWidth="182.0" />
-            <Label fx:id="payeeIdError" textFill="red" text="" wrapText="true">
+            <Label fx:id="payeeIdError" layoutX="648.0" layoutY="461.0" prefHeight="17.0" prefWidth="174.0" text="" textFill="red" wrapText="true">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Label>
-            <Label layoutX="648.0" layoutY="491.0" prefHeight="17.0" prefWidth="104.0" text="Amount:">
+            <Label layoutX="648.0" layoutY="485.0" prefHeight="17.0" prefWidth="104.0" text="Amount:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="amountField" layoutX="649.0" layoutY="524.0" prefHeight="26.0" prefWidth="183.0" />
-            <Label fx:id="amountError" textFill="red" text="" wrapText="true">
+            <TextField fx:id="amountField" layoutX="649.0" layoutY="518.0" prefHeight="26.0" prefWidth="183.0" />
+            <Label fx:id="amountError" layoutX="651.0" layoutY="550.0" prefHeight="17.0" prefWidth="178.0" text="" textFill="red" wrapText="true">
                <VBox.margin>
                   <Insets top="5.0" />
                </VBox.margin>
             </Label>
-            <Button onAction="#sendMoney" layoutX="651.0" layoutY="574.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="183.0" style="-fx-background-color: #1c7ed6;"  text="SEND" textFill="WHITE">
+            <Button layoutX="658.0" layoutY="580.0" mnemonicParsing="false" onAction="#sendMoney" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: #1c7ed6;" text="SEND" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>

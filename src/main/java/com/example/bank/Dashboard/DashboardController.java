@@ -89,51 +89,33 @@ public class DashboardController implements Initializable {
     }
 
     public void sendMoney(){
-        BigDecimal amount = new BigDecimal(amountField.getText());
-
         // clearing error messages
         payeeIdError.setText("");
         amountError.setText("");
 
         // checking if any fields are empty
-        if(payeeIdField.getText().isEmpty()){
+        if(payeeIdField.getText().trim().isEmpty()){
             payeeIdError.setText("Payee ID is required!");
         }
 
-        if(amountField.getText().isEmpty()){
+        if(amountField.getText().trim().isEmpty()){
             amountError.setText("amount is required!");
         }
 
-        // making sure that ID only contains numbers and is 11 characters long
-        if(!payeeIdField.getText().matches("[0-9]+") || payeeIdField.getText().length() != 11 ){
+        // making sure that ID and amount only contains numbers and ID is 11 characters long
+        if(!payeeIdField.getText().matches("[0-9]+") || payeeIdField.getText().length() != 11){
             payeeIdError.setText("Invalid ID!");
             return;
         }
-
-        if(payeeIdField.getText().equals(session.getCurrentUser().getId().toString())){
+        if(!amountField.getText().matches("[0-9]+") ){
+            amountError.setText("Invalid amount!");
             return;
         }
 
-        // find sender user's checking account
-        BankAccount senderAcc = null;
-
-        List<BankAccount> senderAccounts = accountRepository.findAccountByUserId(session.getCurrentUser().getId());
-
-        for(BankAccount account: senderAccounts){
-            if(account.getAccountType() == AccountType.CHECKING_ACCOUNT){
-                senderAcc = account;
-            }
-        }
-
-        // check if user has enough balance
-        if(senderAcc != null && senderAcc.getBalance().compareTo(amount) < 0){
-            amountError.setText("Insufficient balance!");
+        if(payeeIdField.getText().trim().equals(String.valueOf(session.getCurrentUser().getPersonalId()))){
+            payeeIdError.setText("Payee ID can't be your ID!");
             return;
         }
-
-        // deduct amount from senders account
-        senderAcc.setBalance(senderAcc.getBalance().subtract(amount));
-        accountRepository.updateAccountBalance(senderAcc);
 
         // retrieving payee user from database
         long payeeId = Long.parseLong(payeeIdField.getText());
@@ -142,6 +124,27 @@ public class DashboardController implements Initializable {
 
         // creating transaction if payee user exists
         if(payee != null){
+            // find sender user's checking account
+            BigDecimal amount = new BigDecimal(amountField.getText());
+            BankAccount senderAcc = null;
+
+            List<BankAccount> senderAccounts = accountRepository.findAccountByUserId(session.getCurrentUser().getId());
+
+            for(BankAccount account: senderAccounts){
+                if(account.getAccountType() == AccountType.CHECKING_ACCOUNT){
+                    senderAcc = account;
+                }
+            }
+
+            // check if user has enough balance
+            if(senderAcc != null && senderAcc.getBalance().compareTo(amount) < 0){
+                amountError.setText("Insufficient balance!");
+                return;
+            }
+
+            // deduct amount from senders account
+            senderAcc.setBalance(senderAcc.getBalance().subtract(amount));
+            accountRepository.updateAccountBalance(senderAcc);
 
             List<BankAccount> accounts = accountRepository.findAccountByUserId(payee.getId());
 
