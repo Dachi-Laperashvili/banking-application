@@ -19,4 +19,7 @@ module com.example.bank {
     opens com.example.bank.User to javafx.fxml;
     exports com.example.bank.Dashboard;
     opens com.example.bank.Dashboard to javafx.fxml;
+
+    exports com.example.bank.Transaction;
+    opens com.example.bank.Transaction to javafx.fxml;
 }

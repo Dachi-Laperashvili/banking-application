@@ -25,6 +25,33 @@ public class TransactionRepository {
         }
     }
 
+    public List<Transaction> getAll(long userId){
+        List<Transaction> transactions = new ArrayList<>();
+        try(Connection connection= DriverManager.getConnection(dbUrl,dbUser,dbPassword);
+            PreparedStatement statement =
+                    connection.prepareStatement("SELECT * FROM transactions WHERE to_id = ? OR from_id = ? ORDER BY date DESC")){
+            statement.setLong(1, userId);
+            statement.setLong(2, userId);
+
+            try(ResultSet resultSet = statement.executeQuery()){
+                while(resultSet.next()){
+                    Transaction transaction = new Transaction(
+                            resultSet.getLong("to_id"),
+                            resultSet.getLong("from_id"),
+                            resultSet.getBigDecimal("amount"),
+                            resultSet.getTimestamp("date").toLocalDateTime()
+                    );
+
+                    transactions.add(transaction);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return transactions;
+    }
+
     public List<Transaction> getLatestTransactions(long userId){
         List<Transaction> transactions = new ArrayList<>();
         try(Connection connection= DriverManager.getConnection(dbUrl,dbUser,dbPassword);

@@ -14,9 +14,12 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -30,6 +33,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
+    @FXML
+    private AnchorPane content;
     @FXML
     private Label welcomeText;
     @FXML
@@ -59,6 +64,8 @@ public class DashboardController implements Initializable {
     private final TransactionRepository transactionRepository = new TransactionRepository();
 
 
+    //   Initializing
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         init();
@@ -75,6 +82,7 @@ public class DashboardController implements Initializable {
         System.out.println(session.getCurrentUser());
     }
 
+    // Displaying information
     public void displayAccountInfo(){
         List<BankAccount> accounts= accountRepository.findAccountByUserId(session.getCurrentUser().getId());
 
@@ -107,6 +115,8 @@ public class DashboardController implements Initializable {
             transactionsContainer.getChildren().add(transactionLabel);
         }
     }
+
+    // functionality for creating transactions
 
     public void sendMoney(){
         // clearing error messages
@@ -185,6 +195,8 @@ public class DashboardController implements Initializable {
             payeeIdError.setText("Account with that ID doesn't exists");
         }
     }
+
+    //  auto refresh
     public void startAutoRefresh() {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event ->{
             displayAccountInfo();
@@ -192,6 +204,18 @@ public class DashboardController implements Initializable {
         }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
+    }
+
+    // Sidebar buttons functionality
+
+    @FXML
+    public void openTransactions(ActionEvent event) throws IOException{
+        try {
+            AnchorPane transactionsView = FXMLLoader.load(getClass().getResource("/com/example/bank/transactions.fxml"));
+            content.getChildren().setAll(transactionsView);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void logout(ActionEvent event) throws IOException {
