@@ -17,6 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -49,6 +50,8 @@ public class DashboardController implements Initializable {
     private Label payeeIdError;
     @FXML
     private Label amountError;
+    @FXML
+    private VBox transactionsContainer;
 
     private final SessionManager session = SessionManager.getInstance();
     private final AccountRepository accountRepository = new AccountRepository();
@@ -60,6 +63,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         init();
         displayAccountInfo();
+        displayLatestTransactions();
         startAutoRefresh();
     }
 
@@ -85,6 +89,22 @@ public class DashboardController implements Initializable {
                 savingsBalance.setText("$" + account.getBalance().setScale(2, RoundingMode.HALF_UP));
                 savingsAccountId.setText("*** *** *** *** " + accountId.substring(length - 4));
             }
+        }
+    }
+
+    public void displayLatestTransactions(){
+        transactionsContainer.getChildren().clear();
+
+        List<Transaction> transactions = transactionRepository.getLatestTransactions(session.getCurrentUser().getPersonalId());
+
+        for(Transaction transaction: transactions){
+            Label transactionLabel = new Label(
+                    (transaction.getFromId() == session.getCurrentUser().getPersonalId() ? "Sent to: " : "Received from: ") +
+                            transaction.getToId() + " | $" + transaction.getAmount().setScale(2, RoundingMode.HALF_UP) +
+                            " | " + transaction.getDate().format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))
+            );
+            transactionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #343a40;");
+            transactionsContainer.getChildren().add(transactionLabel);
         }
     }
 
@@ -166,7 +186,10 @@ public class DashboardController implements Initializable {
         }
     }
     public void startAutoRefresh() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event -> displayAccountInfo()));
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(5), event ->{
+            displayAccountInfo();
+            displayLatestTransactions();
+        }));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
     }

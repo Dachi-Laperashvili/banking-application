@@ -227,6 +227,8 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Label>
+            <VBox fx:id="transactionsContainer" layoutX="30.0" layoutY="380.0" prefWidth="600.0" spacing="10">
+            </VBox>
          </children>
       </AnchorPane>
    </center>
