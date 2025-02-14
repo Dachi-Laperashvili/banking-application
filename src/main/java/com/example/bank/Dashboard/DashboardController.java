@@ -19,7 +19,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -211,8 +210,7 @@ public class DashboardController implements Initializable {
     @FXML
     public void openTransactions(ActionEvent event) throws IOException{
         try {
-            AnchorPane transactionsView = FXMLLoader.load(getClass().getResource("/com/example/bank/transactions.fxml"));
-            content.getChildren().setAll(transactionsView);
+            NavigationUtil.navigate("/com/example/bank/transactions.fxml",event);
         } catch (IOException e) {
             e.printStackTrace();
         }

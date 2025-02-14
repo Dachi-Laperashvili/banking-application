@@ -23,9 +23,9 @@
                   <Font size="20.0" />
                </font>
             </Text>
-            <Button layoutX="14.0" layoutY="167.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="114.0" style="-fx-background-color: #1c7ed6;" text="Dashboard" textFill="WHITE">
+            <Button layoutX="14.0" layoutY="167.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="114.0" text="Dashboard" >
                <graphic>
-                  <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="2em" />
+                  <FontAwesomeIconView glyphName="HOME" size="2em" />
                </graphic>
             </Button>
             <Button layoutX="16.0" layoutY="232.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" text="Transactions" onAction="#openTransactions">
