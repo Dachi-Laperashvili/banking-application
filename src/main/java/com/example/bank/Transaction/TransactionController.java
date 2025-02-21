@@ -50,6 +50,15 @@ public class TransactionController {
         }
     }
 
+    @FXML
+    public void openAccounts(ActionEvent event) throws IOException{
+        try {
+            NavigationUtil.navigate("/com/example/bank/accounts.fxml",event);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void logout(ActionEvent event) throws IOException {
         session.logout();
         NavigationUtil.navigate("/com/example/bank/login.fxml",event);

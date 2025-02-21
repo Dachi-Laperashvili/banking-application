@@ -2,47 +2,57 @@
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.scene.control.ScrollPane?>
 <BorderPane prefHeight="650.0" prefWidth="1024.0" style="-fx-background-color: eee;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.bank.Transaction.TransactionController">
 <left>
-    <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: fff; -fx-background-radius: 10px;" BorderPane.alignment="CENTER">
+    <AnchorPane prefHeight="600.0" prefWidth="150.0" style="-fx-background-color: #2563EB; -fx-background-radius: 10px;" BorderPane.alignment="CENTER">
         <children>
-            <FontAwesomeIconView fill="#4c4c4e" glyphName="BANK" layoutX="47.0" layoutY="45.0" selectionEnd="0" size="3em" />
-            <Text layoutX="30.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyBank" textAlignment="CENTER" wrappingWidth="82.322265625">
+            <FontAwesomeIconView fill="WHITE" glyphName="BANK" layoutX="47.0" layoutY="45.0" selectionEnd="0" size="3em" />
+            <Text fill="WHITE" layoutX="30.0" layoutY="86.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyBank" textAlignment="CENTER" wrappingWidth="82.322265625">
                 <font>
                     <Font size="20.0" />
                 </font>
             </Text>
-            <Button layoutX="14.0" layoutY="167.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="114.0" text="Dashboard" onAction="#openDashboard">
+            <Button layoutX="14.0" layoutY="167.0" mnemonicParsing="false" onAction="#openDashboard" prefHeight="32.0" prefWidth="114.0" style="-fx-background-color: #2563EB;" text="Dashboard" textFill="WHITE">
                 <graphic>
-                    <FontAwesomeIconView glyphName="HOME" size="2em" />
+                    <FontAwesomeIconView fill="WHITE" glyphName="HOME" size="2em" />
                 </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button layoutX="16.0" layoutY="232.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" text="Transactions">
+            <Button layoutX="16.0" layoutY="232.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="115.0" style="-fx-background-color: #2563EB;" text="Transactions" textFill="WHITE">
                 <graphic>
-                    <FontAwesomeIconView glyphName="LIST" size="2em" />
+                    <FontAwesomeIconView fill="WHITE" glyphName="LIST" size="2em" />
                 </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button layoutX="19.0" layoutY="297.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="109.0" text="Accounts">
+            <Button layoutX="19.0" layoutY="297.0" mnemonicParsing="false" onAction="#openAccounts" prefHeight="32.0" prefWidth="109.0" style="-fx-background-color: #2563EB;" text="Accounts" textFill="WHITE">
                 <graphic>
-                    <FontAwesomeIconView glyphName="ID_CARD" size="2em" wrappingWidth="32.428571701049805" />
+                    <FontAwesomeIconView fill="WHITE" glyphName="ID_CARD" size="2em" wrappingWidth="32.428571701049805" />
                 </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button layoutX="28.0" layoutY="409.0" mnemonicParsing="false" onAction="#logout" text="Logout">
+            <Button layoutX="28.0" layoutY="409.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #2563EB;" text="Logout" textFill="WHITE">
                 <graphic>
-                    <FontAwesomeIconView glyphName="SIGN_OUT" size="2em" />
+                    <FontAwesomeIconView fill="WHITE" glyphName="SIGN_OUT" size="2em" />
                 </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
         </children>
         <BorderPane.margin>
