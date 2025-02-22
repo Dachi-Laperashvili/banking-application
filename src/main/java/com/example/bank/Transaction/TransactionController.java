@@ -1,6 +1,8 @@
 package com.example.bank.Transaction;
 
 import com.example.bank.User.SessionManager;
+import com.example.bank.User.User;
+import com.example.bank.User.UserRepository;
 import com.example.bank.Utilities.NavigationUtil;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +21,7 @@ public class TransactionController {
     private VBox transactionsContainer;
 
     private final SessionManager session = SessionManager.getInstance();
+    private final UserRepository userRepository = new UserRepository();
     private final TransactionRepository transactionRepository = new TransactionRepository();
 
     @FXML
@@ -32,9 +35,11 @@ public class TransactionController {
         List<Transaction> transactions = transactionRepository.getAll(session.getCurrentUser().getPersonalId());
 
         for (Transaction transaction : transactions) {
+            User fromUser = userRepository.findUserByPersonalId(transaction.getFromId());
+            User toUser = userRepository.findUserByPersonalId(transaction.getToId());
             Label transactionLabel = new Label(
-                    (transaction.getFromId() == session.getCurrentUser().getPersonalId() ? "Sent to: " : "Received from: ") +
-                            transaction.getToId() + " | $" + transaction.getAmount().setScale(2, RoundingMode.HALF_UP) +
+                    (transaction.getFromId() == session.getCurrentUser().getPersonalId() ? "Sent to: " + toUser.getFullName()  : "Received from: " + fromUser.getFullName())
+                            + " | $" + transaction.getAmount().setScale(2, RoundingMode.HALF_UP) +
                             " | " + transaction.getDate().format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))
             );
             transactionsContainer.getChildren().add(transactionLabel);

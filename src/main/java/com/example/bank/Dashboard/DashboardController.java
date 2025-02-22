@@ -105,9 +105,11 @@ public class DashboardController implements Initializable {
         List<Transaction> transactions = transactionRepository.getLatestTransactions(session.getCurrentUser().getPersonalId());
 
         for(Transaction transaction: transactions){
+            User fromUser = userRepository.findUserByPersonalId(transaction.getFromId());
+            User toUser = userRepository.findUserByPersonalId(transaction.getToId());
             Label transactionLabel = new Label(
-                    (transaction.getFromId() == session.getCurrentUser().getPersonalId() ? "Sent to: " : "Received from: ") +
-                            transaction.getToId() + " | $" + transaction.getAmount().setScale(2, RoundingMode.HALF_UP) +
+                    (transaction.getFromId() == session.getCurrentUser().getPersonalId() ? "Sent to: " + toUser.getFullName()  : "Received from: " + fromUser.getFullName()) +
+                         " | $" + transaction.getAmount().setScale(2, RoundingMode.HALF_UP) +
                             " | " + transaction.getDate().format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))
             );
             transactionLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #343a40;");
