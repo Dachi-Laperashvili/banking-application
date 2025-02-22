@@ -14,7 +14,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -83,7 +82,7 @@ public class DashboardController implements Initializable {
 
     // Displaying information
     public void displayAccountInfo(){
-        List<BankAccount> accounts= accountRepository.findAccountByUserId(session.getCurrentUser().getId());
+        List<BankAccount> accounts= accountRepository.findAccountsByUserId(session.getCurrentUser().getId());
 
         for(BankAccount account: accounts){
             String accountId = account.getAccountId().toString();
@@ -159,7 +158,7 @@ public class DashboardController implements Initializable {
             BigDecimal amount = new BigDecimal(amountField.getText());
             BankAccount senderAcc = null;
 
-            List<BankAccount> senderAccounts = accountRepository.findAccountByUserId(session.getCurrentUser().getId());
+            List<BankAccount> senderAccounts = accountRepository.findAccountsByUserId(session.getCurrentUser().getId());
 
             for(BankAccount account: senderAccounts){
                 if(account.getAccountType() == AccountType.CHECKING_ACCOUNT){
@@ -177,7 +176,7 @@ public class DashboardController implements Initializable {
             senderAcc.setBalance(senderAcc.getBalance().subtract(amount));
             accountRepository.updateAccountBalance(senderAcc);
 
-            List<BankAccount> accounts = accountRepository.findAccountByUserId(payee.getId());
+            List<BankAccount> accounts = accountRepository.findAccountsByUserId(payee.getId());
 
         //  finding payee's checking account and updating it in database
             for(BankAccount account: accounts){

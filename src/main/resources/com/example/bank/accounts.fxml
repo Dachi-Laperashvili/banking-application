@@ -152,14 +152,19 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="38.0" prefWidth="244.0">
+                  <TextField fx:id="amountForSavings" prefHeight="38.0" prefWidth="244.0">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="242.0" style="-fx-background-color: #1c7ed6;" text="Transfer" textFill="WHITE">
+                   <Label fx:id="savingsAmountError" layoutX="651.0" layoutY="550.0" prefHeight="17.0" prefWidth="178.0" text="" textFill="red" wrapText="true">
+                       <VBox.margin>
+                           <Insets left="22.0" top="5.0" />
+                       </VBox.margin>
+                   </Label>
+                  <Button onAction="#transferToSavings" mnemonicParsing="false" prefHeight="38.0" prefWidth="242.0" style="-fx-background-color: #1c7ed6;" text="Transfer" textFill="WHITE">
                      <VBox.margin>
-                        <Insets left="20.0" right="20.0" top="15.0" />
+                        <Insets left="20.0" right="20.0" top="10.0" />
                      </VBox.margin>
                      <font>
                         <Font size="14.0" />
@@ -181,12 +186,17 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="38.0" prefWidth="244.0">
+                  <TextField fx:id="amountForChecking" prefHeight="38.0" prefWidth="244.0">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="242.0" style="-fx-background-color: #1c7ed6;" text="Transfer" textFill="WHITE">
+                   <Label fx:id="checkingAmountError" layoutX="651.0" layoutY="550.0" prefHeight="17.0" prefWidth="178.0" text="" textFill="red" wrapText="true">
+                       <VBox.margin>
+                           <Insets left="22.0" top="5.0" />
+                       </VBox.margin>
+                   </Label>
+                  <Button onAction="#transferToCheckingAcc" mnemonicParsing="false" prefHeight="38.0" prefWidth="242.0" style="-fx-background-color: #1c7ed6;" text="Transfer" textFill="WHITE">
                      <VBox.margin>
                         <Insets left="20.0" right="20.0" top="15.0" />
                      </VBox.margin>

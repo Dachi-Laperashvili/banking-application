@@ -30,7 +30,7 @@ public class AccountRepository {
         }
     }
 
-    public List<BankAccount> findAccountByUserId(Long user_id){
+    public List<BankAccount> findAccountsByUserId(Long user_id){
         List<BankAccount> accounts = new ArrayList<>();
         try(Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
             PreparedStatement statement = connection.prepareStatement("SELECT * FROM accounts WHERE user_id = ?")){
