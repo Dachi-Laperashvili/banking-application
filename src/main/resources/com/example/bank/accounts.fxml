@@ -78,7 +78,7 @@
                         <Insets left="20.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1234567890123456 " wrappingWidth="173.13671875">
+                  <Text fx:id="CheckingNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="1234567890123456 " wrappingWidth="173.13671875">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -94,7 +94,7 @@
                         <Insets left="20.0" top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="500.00$" wrappingWidth="173.13671875">
+                  <Text fx:id="CheckingBalance" strokeType="OUTSIDE" strokeWidth="0.0" text="500.00$" wrappingWidth="173.13671875">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -119,7 +119,7 @@
                         <Insets left="20.0" top="10.0" />
                      </VBox.margin>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="1234567890123456 " wrappingWidth="173.13671875">
+                  <Text fx:id="SavingsNumber" strokeType="OUTSIDE" strokeWidth="0.0" text="1234567890123456 " wrappingWidth="173.13671875">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -135,7 +135,7 @@
                         <Insets left="20.0" top="15.0" />
                      </VBox.margin>
                   </Label>
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="500.00$" wrappingWidth="173.13671875">
+                  <Text fx:id="SavingsBalance" strokeType="OUTSIDE" strokeWidth="0.0" text="500.00$" wrappingWidth="173.13671875">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
