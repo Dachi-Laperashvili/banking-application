@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.math.RoundingMode;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javafx.geometry.Insets;
 
 public class TransactionController {
     @FXML
@@ -42,6 +43,15 @@ public class TransactionController {
                             + " | $" + transaction.getAmount().setScale(2, RoundingMode.HALF_UP) +
                             " | " + transaction.getDate().format(DateTimeFormatter.ofPattern("MMM dd, HH:mm"))
             );
+
+            transactionLabel.setStyle("-fx-font-size: 17px; " +
+                    "-fx-text-fill: #333; " +
+                    "-fx-background-color: #f9f9f9; " +
+                    "-fx-border-width: 1px; " +
+                    "-fx-background-radius: 5px; ");
+
+            transactionLabel.setPadding(new Insets(10));
+            VBox.setMargin(transactionLabel, new Insets(10));
             transactionsContainer.getChildren().add(transactionLabel);
         }
     }
